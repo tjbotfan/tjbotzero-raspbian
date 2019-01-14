@@ -7,8 +7,9 @@
 ### 改善点
 - Add CHANGES.md
 - GUI Desktop Autologin Support
+- VNC Desktop Support
 - Audio Support
-- Mecab Support
+- hostip check
 - Open JTalk Support
 - ハンズオンフローの追加
 
