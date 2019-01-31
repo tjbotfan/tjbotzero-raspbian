@@ -1,30 +1,45 @@
 set -eux
+
+# Kill chromium to avoid swap
 set +e
 killall chromium-browser
 set -e
+
+# Update Raspbian
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get -y dist-upgrade
+
+# OS configuration 
 sudo raspi-config nonint do_wifi_country JP
-sudo sh -c 'wpa_passphrase BMXUG TJBot2018 >> /etc/wpa_supplicant/wpa_supplicant.conf'
 sudo raspi-config nonint do_camera 0
-sudo raspi-config nonint do_ssh 1
+sudo raspi-config nonint do_ssh 0
 sudo raspi-config nonint do_vnc 0
 sudo raspi-config nonint do_resolution 2 16
 sudo sh -c 'echo dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4 >> /boot/config.txt'
+set +e
 amixer -D hw:1 sset Mic 100%
+set -e
 amixer -c0 sset PCM 100% unmute
-sudo apt-get update
+
+# Install Node-RED
 sudo apt-get install -y build-essential
-curl -sL https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered
+curl -L -O https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered
 bash update-nodejs-and-nodered
 rm update-nodejs-and-nodered
 sudo systemctl enable nodered.service
-sudo apt-get install -y npm
-sudo npm install -g npm
-hash -r
+
+# Prepare directory for node installation
 set +e
 mv ~/.node-red ~/.node-red.`date "+%Y%m%d-%H%M%S"`.bak
 set -e
 mkdir ~/.node-red
 cd ~/.node-red
+
+# Install node
+sudo apt-get install -y npm
+sudo npm install -g npm
+hash -r
 npm install node-red-node-watson
 npm install node-red-dashboard
 npm install node-red-contrib-camerapi
@@ -42,6 +57,21 @@ npm install node-red-contrib-model-asset-exchange
 npm install node-red-contrib-hostip
 npm install node-red-contrib-moment
 npm install node-red-contrib-openjtalk
+curl -L -O https://github.com/julius-speech/julius/archive/v4.5.zip
+unzip v4.5.zip
+cd julius-4.5
+./configure
+make
+sudo make install
+cd ..
+rm -fr julius-4.5
+npm install node-red-contrib-julius
+npm install node-red-contrib-max-audio-classifer
+
+# Save sample flow
+curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/flows_raspberrypi.json
+
+# Show message
 set +x
 echo "L|o_o| < The installation process has been completed successfully!"
 echo "L|o_o| < After rebooting Raspberry Pi, you can use your TJBot."
