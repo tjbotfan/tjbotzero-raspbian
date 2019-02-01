@@ -54,6 +54,7 @@ npm install node-red-contrib-cognitive-services
 npm install node-red-contrib-google-translate
 npm install node-red-contrib-cloud-vision-api
 npm install node-red-contrib-model-asset-exchange
+npm install node-red-contrib-max-audio-classifier
 npm install node-red-contrib-hostip
 npm install node-red-contrib-moment
 npm install node-red-contrib-openjtalk
@@ -67,9 +68,11 @@ cd ..
 rm -fr julius-4.5
 rm v4.5.zip
 npm install node-red-contrib-julius
-npm install node-red-contrib-max-audio-classifier
+cd node_modules/node-red-contrib-julius
+npm run build
 
 # Save sample Node-RED flow
+cd ~/.node-red
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/flows_raspberrypi.json
 
 # Show messages
