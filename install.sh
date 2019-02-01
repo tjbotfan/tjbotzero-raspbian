@@ -29,14 +29,14 @@ bash update-nodejs-and-nodered
 rm update-nodejs-and-nodered
 sudo systemctl enable nodered.service
 
-# Prepare directory for node installation
+# Prepare Node-RED home directory
 set +e
 mv ~/.node-red ~/.node-red.`date "+%Y%m%d-%H%M%S"`.bak
 set -e
 mkdir ~/.node-red
 cd ~/.node-red
 
-# Install node
+# Install Node-RED nodes
 sudo apt-get install -y npm
 sudo npm install -g npm
 hash -r
@@ -49,7 +49,7 @@ npm install node-red-contrib-play-audio
 npm install node-red-contrib-browser-utils
 npm install node-red-node-base64
 sudo apt-get install -y libopencv-dev
-#hoge# npm install node-red-contrib-opencv
+npm install node-red-contrib-opencv
 npm install node-red-contrib-cognitive-services
 npm install node-red-contrib-google-translate
 npm install node-red-contrib-cloud-vision-api
@@ -65,13 +65,14 @@ make
 sudo make install
 cd ..
 rm -fr julius-4.5
+rm v4.5.zip
 npm install node-red-contrib-julius
-npm install node-red-contrib-max-audio-classifer
+npm install node-red-contrib-max-audio-classifier
 
-# Save sample flow
+# Save sample Node-RED flow
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/flows_raspberrypi.json
 
-# Show message
+# Show messages
 set +x
-echo "L|o_o| < The installation process has been completed successfully!"
-echo "L|o_o| < After rebooting Raspberry Pi, you can use your TJBot."
+echo "((L|o_o| < The installation process has been completed successfully!"
+echo "((L|o_o| < After rebooting Raspberry Pi, you can use your TJBot."
