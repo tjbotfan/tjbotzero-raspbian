@@ -53,6 +53,7 @@ npm install node-red-contrib-opencv
 npm install node-red-contrib-cognitive-services
 npm install node-red-contrib-google-translate
 npm install node-red-contrib-cloud-vision-api
+npm install node-red-contrib-qrcode
 npm install node-red-contrib-model-asset-exchange
 npm install node-red-contrib-max-audio-classifier
 npm install node-red-contrib-hostip
