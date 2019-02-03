@@ -19,8 +19,8 @@ sudo raspi-config nonint do_resolution 2 16
 sudo sh -c 'echo dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4 >> /boot/config.txt'
 set +e
 amixer -D hw:1 sset Mic 100%
-set -e
 amixer -c0 sset PCM 100% unmute
+set -e
 
 # Install Node-RED
 sudo apt-get install -y build-essential
@@ -37,9 +37,11 @@ mkdir ~/.node-red
 cd ~/.node-red
 
 # Install Node-RED nodes
+set +e
 sudo apt-get install -y npm
 sudo npm install -g npm
 hash -r
+set -e
 npm install node-red-node-watson
 npm install node-red-dashboard
 npm install node-red-contrib-camerapi
@@ -56,6 +58,7 @@ npm install node-red-contrib-cloud-vision-api
 npm install node-red-contrib-qrcode
 npm install node-red-contrib-model-asset-exchange
 npm install node-red-contrib-max-audio-classifier
+npm install node-red-contrib-embedded-file
 npm install node-red-contrib-hostip
 npm install node-red-contrib-moment
 npm install node-red-contrib-openjtalk
