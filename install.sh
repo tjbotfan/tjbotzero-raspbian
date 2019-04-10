@@ -2,7 +2,7 @@ set -eux
 
 # Kill chromium to avoid swap
 set +e
-killall chromium-browser
+killall /usr/lib/chromium-browser/chromium-browser
 set -e
 
 # Update Raspbian
