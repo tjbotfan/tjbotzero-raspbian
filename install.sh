@@ -45,6 +45,7 @@ set -e
 npm install node-red-node-watson
 npm install node-red-dashboard
 npm install node-red-contrib-camerapi
+npm install node-red-contrib-image-output
 sudo apt-get install -y libasound2-dev
 npm install node-red-contrib-speakerpi
 npm install node-red-contrib-play-audio
