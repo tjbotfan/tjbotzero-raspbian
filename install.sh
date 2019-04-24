@@ -57,7 +57,7 @@ npm install node-red-contrib-cognitive-services
 npm install node-red-contrib-google-translate
 npm install node-red-contrib-cloud-vision-api
 npm install node-red-contrib-qrcode
-npm install node-red-contrib-model-asset-exchange
+npm install node-red-contrib-model-asset-exchange@0.2.0
 npm install node-red-contrib-embedded-file
 npm install node-red-contrib-hostip
 npm install node-red-contrib-moment
