@@ -79,6 +79,9 @@ npm run build
 cd ~/.node-red
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/flows_raspberrypi.json
 
+# Use stable version of Node-RED temporarily
+sudo npm install -g --unsafe-perm node-red@0.19.4
+
 # Show messages
 set +x
 echo "((L|o_o| < The installation process has been completed successfully!"
