@@ -44,6 +44,7 @@ hash -r
 set -e
 npm install node-red-node-watson
 npm install node-red-dashboard
+sudo apt-get install -y python-picamera python3-picamera
 npm install node-red-contrib-camerapi
 npm install node-red-contrib-image-output
 sudo apt-get install -y libasound2-dev
