@@ -50,7 +50,7 @@ npm install node-red-contrib-image-output
 sudo apt-get install -y libasound2-dev
 npm install node-red-contrib-speakerpi
 npm install node-red-contrib-play-audio
-npm install node-red-contrib-browser-utils
+npm install node-red-contrib-mic
 npm install node-red-node-base64
 sudo apt-get install -y libopencv-dev
 npm install node-red-contrib-opencv
