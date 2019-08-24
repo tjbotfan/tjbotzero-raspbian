@@ -10,14 +10,14 @@ sudo apt-get update
 sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 
-# OS configuration 
+# OS configuration
+set +e
 sudo raspi-config nonint do_wifi_country JP
 sudo raspi-config nonint do_camera 0
 sudo raspi-config nonint do_ssh 0
 sudo raspi-config nonint do_vnc 0
 sudo raspi-config nonint do_resolution 2 16
 sudo sh -c 'echo dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4 >> /boot/config.txt'
-set +e
 amixer -D hw:1 sset Mic 100%
 amixer -c0 sset PCM 100% unmute
 set -e
