@@ -80,9 +80,6 @@ npm run build
 cd ~/.node-red
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/flows_raspberrypi.json
 
-# Use beta version of Node-RED temporarily
-sudo npm install -g --unsafe-perm node-red@1.0.0-beta.3
-
 # Add message catalog for Japanese hiragana
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/messagecatalog_hiragana.zip
 unzip messagecatalog_hiragana.zip
