@@ -19,7 +19,7 @@ sudo raspi-config nonint do_vnc 0
 sudo raspi-config nonint do_resolution 2 16
 sudo sh -c 'echo dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4 >> /boot/config.txt'
 amixer -D hw:1 sset Mic 100%
-amixer -c0 sset PCM 100% unmute
+amixer -c 0 sset PCM 100% unmute
 set -e
 
 # Install Node-RED
