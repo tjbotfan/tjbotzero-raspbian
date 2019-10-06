@@ -45,6 +45,7 @@ sudo apt-get install -y npm
 sudo npm install -g npm
 hash -r
 set -e
+npm install node-red-node-pi-gpio
 npm install node-red-node-watson
 npm install node-red-contrib-cos
 npm install node-red-dashboard
