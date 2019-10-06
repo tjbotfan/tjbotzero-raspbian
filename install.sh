@@ -24,7 +24,7 @@ set -e
 
 # Install Node-RED
 sudo apt-get install -y build-essential
-curl -L -O https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
+yes "y" | curl -L -O https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
 bash update-nodejs-and-nodered
 rm update-nodejs-and-nodered
 sudo systemctl enable nodered.service
