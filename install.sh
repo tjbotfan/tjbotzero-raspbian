@@ -25,7 +25,7 @@ set -e
 # Install Node-RED
 sudo apt-get install -y build-essential
 curl -L -O https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
-bash update-nodejs-and-nodered
+yes "y" | bash update-nodejs-and-nodered
 rm update-nodejs-and-nodered
 sudo systemctl enable nodered.service
 
@@ -43,6 +43,7 @@ sudo npm install -g npm
 hash -r
 set -e
 npm install node-red-node-watson
+npm install node-red-contrib-cos
 npm install node-red-dashboard
 sudo apt-get install -y python-picamera python3-picamera
 npm install node-red-contrib-camerapi
@@ -50,7 +51,7 @@ npm install node-red-contrib-image-output
 sudo apt-get install -y libasound2-dev
 npm install node-red-contrib-speakerpi
 npm install node-red-contrib-play-audio
-npm install node-red-contrib-browser-utils
+npm install node-red-contrib-mic
 npm install node-red-node-base64
 sudo apt-get install -y libopencv-dev
 npm install node-red-contrib-opencv
@@ -62,6 +63,7 @@ npm install node-red-contrib-model-asset-exchange
 npm install node-red-contrib-embedded-file
 npm install node-red-contrib-hostip
 npm install node-red-contrib-moment
+sudo apt-get install -y festival
 npm install node-red-contrib-openjtalk
 curl -L -O https://github.com/julius-speech/julius/archive/v4.5.zip
 unzip v4.5.zip
@@ -79,6 +81,9 @@ npm run build
 # Save sample Node-RED flow
 cd ~/.node-red
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/flows_raspberrypi.json
+
+# package.json refresh
+npm init -y 
 
 # Add message catalog for Japanese hiragana
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/messagecatalog_hiragana.zip
