@@ -1,5 +1,8 @@
 set -eux
 
+# change runlevel for install
+systemctl isolate multi-user.target
+
 # Kill chromium to avoid swap
 set +e
 killall /usr/lib/chromium-browser/chromium-browser
@@ -90,6 +93,10 @@ curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/
 unzip messagecatalog_hiragana.zip
 cp -r @node-red /usr/local/lib/node_modules/node-red/node_modules/
 rm -fr @node-red messagecatalog_hiragana.zip
+
+
+# change back runlevel for install
+systemctl isolate graphical.target
 
 # Show messages
 set +x
