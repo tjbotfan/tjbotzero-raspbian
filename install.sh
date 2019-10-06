@@ -7,24 +7,24 @@ set -e
 
 # Update Raspbian
 sudo apt-get update
-sudo apt-get -y upgrade
-sudo apt-get -y dist-upgrade
+#sudo apt-get -y upgrade
+#sudo apt-get -y dist-upgrade
 
-# OS configuration 
+# OS configuration
+set +e
 sudo raspi-config nonint do_wifi_country JP
 sudo raspi-config nonint do_camera 0
 sudo raspi-config nonint do_ssh 0
 sudo raspi-config nonint do_vnc 0
 sudo raspi-config nonint do_resolution 2 16
 sudo sh -c 'echo dtoverlay=pwm-2chan,pin=18,func=2,pin2=13,func2=4 >> /boot/config.txt'
-set +e
 amixer -D hw:1 sset Mic 100%
-amixer -c0 sset PCM 100% unmute
+amixer -c 0 sset PCM 100% unmute
 set -e
 
 # Install Node-RED
 sudo apt-get install -y build-essential
-curl -L -O https://raw.githubusercontent.com/node-red/raspbian-deb-package/master/resources/update-nodejs-and-nodered
+curl -L -O https://raw.githubusercontent.com/node-red/linux-installers/master/deb/update-nodejs-and-nodered
 bash update-nodejs-and-nodered
 rm update-nodejs-and-nodered
 sudo systemctl enable nodered.service
@@ -59,10 +59,11 @@ npm install node-red-contrib-cognitive-services
 npm install node-red-contrib-google-translate
 npm install node-red-contrib-cloud-vision-api
 npm install node-red-contrib-qrcode
-npm install node-red-contrib-model-asset-exchange@0.2.0
+npm install node-red-contrib-model-asset-exchange
 npm install node-red-contrib-embedded-file
 npm install node-red-contrib-hostip
 npm install node-red-contrib-moment
+sudo apt-get install -y festival
 npm install node-red-contrib-openjtalk
 curl -L -O https://github.com/julius-speech/julius/archive/v4.5.zip
 unzip v4.5.zip
@@ -84,8 +85,11 @@ curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/
 # package.json refresh
 npm init -y 
 
-# Use stable version of Node-RED temporarily
-sudo npm install -g --unsafe-perm node-red@0.19.4
+# Add message catalog for Japanese hiragana
+curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/messagecatalog_hiragana.zip
+unzip messagecatalog_hiragana.zip
+cp -r @node-red /usr/local/lib/node_modules/node-red/node_modules/
+rm -fr @node-red messagecatalog_hiragana.zip
 
 # Show messages
 set +x
