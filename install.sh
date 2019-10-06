@@ -1,7 +1,7 @@
 set -eux
 
 # change runlevel for install
-systemctl isolate multi-user.target
+sudo systemctl isolate multi-user.target
 
 # Kill chromium to avoid swap
 set +e
@@ -86,18 +86,18 @@ npm run build
 cd ~/.node-red
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/flows_raspberrypi.json
 
-# package.json refresh
-npm init -y 
-
 # Add message catalog for Japanese hiragana
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/messagecatalog_hiragana.zip
 unzip messagecatalog_hiragana.zip
 cp -r @node-red /usr/local/lib/node_modules/node-red/node_modules/
 rm -fr @node-red messagecatalog_hiragana.zip
 
+# package.json refresh
+npm init -y 
+
 
 # change back runlevel for install
-systemctl isolate graphical.target
+sudo systemctl isolate graphical.target
 
 # Show messages
 set +x
