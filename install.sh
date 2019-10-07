@@ -34,9 +34,9 @@ sudo systemctl enable nodered.service
 
 # Prepare Node-RED home directory
 set +e
-mv ~/.node-red ~/.node-red.`date "+%Y%m%d-%H%M%S"`.bak
+cp -Rp ~/.node-red ~/.node-red.`date "+%Y%m%d-%H%M%S"`.bak
 set -e
-mkdir ~/.node-red
+#mkdir ~/.node-red
 cd ~/.node-red
 
 # Install Node-RED nodes
@@ -89,7 +89,7 @@ curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/
 # Add message catalog for Japanese hiragana
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/messagecatalog_hiragana.zip
 unzip messagecatalog_hiragana.zip
-cp -r @node-red /usr/local/lib/node_modules/node-red/node_modules/
+sudo cp -r @node-red /usr/lib/node_modules/node-red/node_modules/
 rm -fr @node-red messagecatalog_hiragana.zip
 
 # package.json refresh
