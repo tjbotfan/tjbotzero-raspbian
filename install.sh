@@ -1,5 +1,8 @@
 set -eux
 
+# change runlevel for install
+sudo systemctl isolate multi-user.target
+
 # Kill chromium to avoid swap
 set +e
 killall /usr/lib/chromium-browser/chromium-browser
@@ -31,9 +34,9 @@ sudo systemctl enable nodered.service
 
 # Prepare Node-RED home directory
 set +e
-mv ~/.node-red ~/.node-red.`date "+%Y%m%d-%H%M%S"`.bak
+cp -Rp ~/.node-red ~/.node-red.`date "+%Y%m%d-%H%M%S"`.bak
 set -e
-mkdir ~/.node-red
+#mkdir ~/.node-red
 cd ~/.node-red
 
 # Install Node-RED nodes
@@ -42,6 +45,7 @@ sudo apt-get install -y npm
 sudo npm install -g npm
 hash -r
 set -e
+npm install node-red-node-pi-gpio
 npm install node-red-node-watson
 npm install node-red-contrib-cos
 npm install node-red-dashboard
@@ -82,14 +86,18 @@ npm run build
 cd ~/.node-red
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/flows_raspberrypi.json
 
-# package.json refresh
-npm init -y 
-
 # Add message catalog for Japanese hiragana
 curl -L -O https://raw.githubusercontent.com/tjbotfan/tjbotzero-raspbian/master/messagecatalog_hiragana.zip
 unzip messagecatalog_hiragana.zip
-cp -r @node-red /usr/local/lib/node_modules/node-red/node_modules/
+sudo cp -r @node-red /usr/lib/node_modules/node-red/node_modules/
 rm -fr @node-red messagecatalog_hiragana.zip
+
+# package.json refresh
+npm init -y 
+
+
+# change back runlevel for install
+sudo systemctl isolate graphical.target
 
 # Show messages
 set +x
